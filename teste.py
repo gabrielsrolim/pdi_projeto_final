@@ -179,26 +179,27 @@ def GerarMascaraPupila(iplimage orig):
 """
 
 if __name__ == "__main__":
-    list1 = os.listdir('.')
+    dirbase = 'MMU_Iris_Database/'
+    list1 = os.listdir(dirbase)
     for l in list1:
         try:
-            list2 = os.listdir(l+"/")
+            list2 = os.listdir(dirbase+l+"/")
         except:
             print('Erro1')
         for laus in list2:
             try:
-                list3 = os.listdir(l+"/"+laus+"/")
+                list3 = os.listdir(dirbase+l+"/"+laus+"/")
             except:
                 print('Erro1')
             for laux in list3:
-                string = "/home/gabriel/Downloads/MMU_Iris_Database/"+l+"/"+laus+"/"+laux
+                string = dirbase+l+"/"+laus+"/"+laux
                 print "caminho: %s" % string
                 nome = laux.split('.')[0]
                 try:
                     orig = cv.LoadImage(string)
                 except:
                     print('Erro')
-                nomeImage = "/home/gabriel/Downloads/MMU_Iris_Database/"+l+"/"+laus+"/"+nome+"_2.bmp"
+                nomeImage = "iris/"+nome+"_2.bmp"
                 print "nomefinal: %s" % nomeImage
                 try:
                     pegarIris(orig,nomeImage)     
