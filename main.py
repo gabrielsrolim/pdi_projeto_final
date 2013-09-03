@@ -3,7 +3,7 @@ from Iris import Iris,pegarIris,gerarDct,inicializarListaIris,procurarIris,\
                  inicializarListaIrisBoas 
 
 if __name__ == "__main__":
-    listIris = inicializarListaIrisBoas()    
+    listIris = inicializarListaIris()    
     
     while(True):
         caminho = raw_input('Digite o caminho da iris a identificar: ')

@@ -17,37 +17,37 @@ class ErroDct():
 
 def inicializarListaIris():
     listIris = []
-    dirbase = 'iris/'
+    dirbase = 'MMU_Iris_Database/'
     list1 = os.listdir(dirbase)
     print("Inicializando iris, Aguarde...")
     for l in list1:
         try:
             list2 = os.listdir(dirbase+l+"/")
+            for laus in list2:
+                try:
+                    list3 = os.listdir(dirbase+l+"/"+laus+"/")
+                
+                    for laux in list3:
+                        string = dirbase+l+"/"+laus+"/"+laux
+                        #print "caminho: %s" % string
+                        nome = laux.split('.')[0]
+                        extensao = laux.split('.')[1]
+                        #print 'extensao %s' %extensao
+                        if extensao == "bmp":
+                            try:
+                                nomeImage = "iris/"+nome+"_2.bmp"
+                                iris = pegarIris(string,nomeImage)
+                                dct = gerarDct(nomeImage)
+                                irisNew = Iris(nomeImage,dct,iris)
+                                listIris.append(irisNew)     
+                            except:
+                                print 'Caminho invalido %s' %string
+                        else:
+                            print 'Img Invalida %s' %string
+                except:
+                    print 'Diretorio invalido %s' % dirbase+l+"/"+laus+"/"
         except:
-            print('Erro1')
-        for laus in list2:
-            try:
-                list3 = os.listdir(dirbase+l+"/"+laus+"/")
-            
-                for laux in list3:
-                    string = dirbase+l+"/"+laus+"/"+laux
-                    #print "caminho: %s" % string
-                    nome = laux.split('.')[0]
-                    extensao = laux.split('.')[1]
-                    #print 'extensao %s' %extensao
-                    if extensao == "bmp":
-                        try:
-                            nomeImage = "iris/"+nome+"_2.bmp"
-                            iris = pegarIris(string,nomeImage)
-                            dct = gerarDct(nomeImage)
-                            irisNew = Iris(nomeImage,dct,iris)
-                            listIris.append(irisNew)     
-                        except:
-                            print 'Caminho invalido %s' %string
-                    else:
-                        print 'Img Invalida %s' %string
-            except:
-                print 'Diretorio invalido %s' % dirbase+l+"/"+laus+"/"
+             print 'Diretorio invalido %s' % dirbase+l+"/"
     return listIris
 
 def inicializarListaIrisBoas():
@@ -250,7 +250,7 @@ def procurarIris(listIris,caminnhoimg):
         index = index + 1
 
     lista =sorted(listErroDct, key=por_erroQuadratico)
-    listErroDct.sort()
+    #listErroDct.sort()
 
     for a in lista:
         print "Erro %f nome: %s" %(a.errodct,a.nomeArquivo)
